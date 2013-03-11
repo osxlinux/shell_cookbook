@@ -231,8 +231,8 @@ _=/bin/env
 ~/.bashrc 中定义 a=345
 /etc/bashrc a=456
 </code></pre>
->><p>那么其执行的先后顺序如下:</p>
->><pre><code>
+<p>那么其执行的先后顺序如下:</p>
+<pre><code>
 /etc/profile
 /root/.bash_profile
 /root/.bashrc
@@ -268,7 +268,7 @@ hello
 [root@localhost ~]# echo $a
 123
 [root@localhost ~]# 
-<2>
+<图2>
 </code></pre>
 <p>如图1.2对比，当a没有值得时候，临时使用hello。当a有值的时候输出a的值。</p>
 <p>总结：`${var:-word} `如果var没有值，则临时设定值为`word`</p>
