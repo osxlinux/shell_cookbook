@@ -238,30 +238,30 @@ _=/bin/env
 /root/.bashrc
 /etc/bashrc
 </code></pre>
->>
->><p>登陆shell和非登陆shell</p>
->><p>登陆shell是指当用户登陆系统时所取得的那个shell，通过查找以上四个不同的启动文件来处理其中的命令，bash处理顺序如下：</p>
->>	/etc/profile-----/$home/.bash_profile------/$home/.bashrc-------/etc/bashrc
->><p>非登陆shell</p>
->><p>`/etc/bashrc` 尽管不是通过bash直接调用，但许多`~/.bashrc`文件调用`/etc/bashrc`。这种设置使得超级用户可以为系统内的非登陆shell建立默认属性。</p>
->><p>`.bashrc`非登陆shell执行`~/.bashrc`文件中的命令，而登陆shell的启动文件（如`.bash_profile`）通常会运行这个文件。这样，登陆shell和非登陆shell都可以运行`.bashrc`中的命令了。</p>
->>
->><p>典型的例子 su 和su –</p>
->><p>su – 登陆shell</p>
->><p>su 非登陆shell</p>
->><p>总结一下shell内置的环境变量有哪些？</p>
->
->*	四． 变量的有意思的用法。
->><pre><code>
+
+<p>登陆shell和非登陆shell</p>
+<p>登陆shell是指当用户登陆系统时所取得的那个shell，通过查找以上四个不同的启动文件来处理其中的命令，bash处理顺序如下：</p>
+	/etc/profile-----/$home/.bash_profile------/$home/.bashrc-------/etc/bashrc
+<p>非登陆shell</p>
+<p>`/etc/bashrc` 尽管不是通过bash直接调用，但许多`~/.bashrc`文件调用`/etc/bashrc`。这种设置使得超级用户可以为系统内的非登陆shell建立默认属性。</p>
+<p>`.bashrc`非登陆shell执行`~/.bashrc`文件中的命令，而登陆shell的启动文件（如`.bash_profile`）通常会运行这个文件。这样，登陆shell和非登陆shell都可以运行`.bashrc`中的命令了。</p>
+
+<p>典型的例子 su 和su –</p>
+<p>su – 登陆shell</p>
+<p>su 非登陆shell</p>
+<p>总结一下shell内置的环境变量有哪些？</p>
+
+*	四． 变量的有意思的用法。
+<pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:-hello}
 hello
 [root@localhost ~]# echo $a
 
->>[root@localhost ~]#
+[root@localhost ~]#
 <图1>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# echo ${a:-hello}
 123
@@ -270,10 +270,9 @@ hello
 [root@localhost ~]# 
 <2>
 </code></pre>
->><p>如图1.2对比，当a没有值得时候，临时使用hello。当a有值的时候输出a的值。</p>
->><p>总结：`${var:-word} `如果var没有值，则临时设定值为`word`</p>
->>
->><pre><code>
+<p>如图1.2对比，当a没有值得时候，临时使用hello。当a有值的时候输出a的值。</p>
+<p>总结：`${var:-word} `如果var没有值，则临时设定值为`word`</p>
+<pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:=hello}
 hello
@@ -282,7 +281,7 @@ hello
 [root@localhost ~]# 
 <图3>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# echo ${a:=hello}
 123
@@ -291,20 +290,20 @@ hello
 [root@localhost ~]# 
 <图4>
 </code></pre>
->><p>如图3.4对比，当a没有值的时候，会设定为hello。当a有值时输出a的值。</p>
->><p>总结 ：${var:=word}如果var没有值，设定为word。当var有值输出a的值。</p>
->><pre><code>
+<p>如图3.4对比，当a没有值的时候，会设定为hello。当a有值时输出a的值。</p>
+<p>总结 ：${var:=word}如果var没有值，设定为word。当var有值输出a的值。</p>
+<pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:+hello}
 
->>[root@localhost ~]# echo $a
+[root@localhost ~]# echo $a
 
->>[root@localhost ~]# 
+[root@localhost ~]# 
 
->><图5>
+<图5>
 
->></code></pre>
->><pre><code>
+</code></pre>
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# echo ${a:+hello}
 hello
@@ -313,16 +312,16 @@ hello
 [root@localhost ~]# 
 <图6>
 </code></pre>
->><p>如图5.6，当a有值时，会临时使用hello，但是值本身不改变。</p>
->><p>总结：${var:+word} 如果var有值，临时设定为word，但是var本身的值不改变。</p>
->><pre><code>
+<p>如图5.6，当a有值时，会临时使用hello，但是值本身不改变。</p>
+<p>总结：${var:+word} 如果var有值，临时设定为word，但是var本身的值不改变。</p>
+<pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:?hello}
 bash: a: hello
 [root@localhost ~]# 
 <图7>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# echo ${a:?hello}
 123
@@ -331,9 +330,9 @@ bash: a: hello
 [root@localhost ~]#
 <图8>
 </code></pre>
->><p>如图：7.8,如果a没有值，报错，如果a有值打印出a的值；</p>
->><p>总结：${var:?word} 如果var没有值，报错，如果var有值打印出var的值。</p>
->><pre><code>
+<p>如图：7.8,如果a没有值，报错，如果a有值打印出a的值；</p>
+<p>总结：${var:?word} 如果var没有值，报错，如果var有值打印出var的值。</p>
+<pre><code>
 [root@localhost ~]# a=hello
 [root@localhost ~]# echo ${a:0}
 hello
@@ -348,89 +347,88 @@ o
 [root@localhost ~]# 
 <图9>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=hello
 [root@localhost ~]# echo ${a:1:3}
 ell
 [root@localhost ~]#
 <图10>
 </code></pre>
->><p>如图9.10</p>
->><p>总结：${var:offset}从变量offset位置开始，输出到结束</p>
->><p>$(var:offset：length)从变量offset开始，输出length</p>
->><pre><code>
+<p>如图9.10</p>
+<p>总结：${var:offset}从变量offset位置开始，输出到结束</p>
+<p>$(var:offset：length)从变量offset开始，输出length</p>
+<pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a%/*}
 /usr/bin
 [root@localhost ~]# 
 <图11>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a%%/*}  
 
->>[root@localhost ~]#
+[root@localhost ~]#
 <图12>
 </code></pre>
->><p>如图11从a的值的结尾开始往前数，进行最小匹配，删除匹配部分。返回的是`/usr/bin`</p>
->><p>如图12从a的值的结尾开始往前数，进行最大的匹配，并删除匹配的部分，那么返回值为空</p>
->><p>总结：${var%模式}从尾部开始，进行最小匹配,,然后删除匹配部分。</p>
->><p>${var%%模式}从尾部开始，进行最大匹配，然后删除匹配部分。</p>
->><pre><code>
->[root@localhost ~]# a=/usr/bin/bash
+<p>如图11从a的值的结尾开始往前数，进行最小匹配，删除匹配部分。返回的是`/usr/bin`</p>
+<p>如图12从a的值的结尾开始往前数，进行最大的匹配，并删除匹配的部分，那么返回值为空</p>
+<p>总结：${var%模式}从尾部开始，进行最小匹配,,然后删除匹配部分。</p>
+<p>${var%%模式}从尾部开始，进行最大匹配，然后删除匹配部分。</p>
+<pre><code>
+[root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a#/*}   
 usr/bin/bash
 [root@localhost ~]# 
 <图13>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a##/*}  
 
->>[root@localhost ~]# 
+[root@localhost ~]# 
 
->><图14>
+<图14>
 </code></pre>
->>
->><p>如图13以`/`分割，从左开始第一个/之前的部分（包括/）匹配，那么删除之前的部分。</p>
->><p>如图14以`/`为分割，从左开始第一个直到结尾最后一个/的内容最大匹配，那么删除之前的部分。</p>
->><p>总结：`${var#模式}`从头部开始，进行最小匹配，然后删除匹配部分。</p>
->><p>`${var##模式}`从头部开始，进行最大匹配，然后删除匹配部分。</p>
->><pre><code>[root@localhost ~]# a=nalmelaminceaneak
+<p>如图13以`/`分割，从左开始第一个/之前的部分（包括/）匹配，那么删除之前的部分。</p>
+<p>如图14以`/`为分割，从左开始第一个直到结尾最后一个/的内容最大匹配，那么删除之前的部分。</p>
+<p>总结：`${var#模式}`从头部开始，进行最小匹配，然后删除匹配部分。</p>
+<p>`${var##模式}`从头部开始，进行最大匹配，然后删除匹配部分。</p>
+<pre><code>[root@localhost ~]# a=nalmelaminceaneak
 [root@localhost ~]# echo ${#a}
 17
 [root@localhost ~]# 
 <图15>
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# a=nsnkdknekalsmle1111
 [root@localhost ~]# echo ${#a}           
 19
 [root@localhost ~]# 
 <图16>
 </code></pre>
->>如图15.16变量之前的#是可以用来计算变量值中的字符串的。
->>总结：${#var} 用来计算变量字符串。
->>以上部分作为在shell中字符串的截取。其中 * 通配符，还可以用 ？号
->><pre><code>
+如图15.16变量之前的#是可以用来计算变量值中的字符串的。
+总结：${#var} 用来计算变量字符串。
+以上部分作为在shell中字符串的截取。其中 * 通配符，还可以用 ？号
+<pre><code>
 [root@localhost ~]# echo ${!P*}
 PATH PIPESTATUS PPID PS1 PS2 PS4 PWD
 [root@localhost ~]# 
 <图17>
 </code></pre>
->><p>如图17打印出系统中以P开头的变量。</p>
->><p>总结： `${!var@}`</p>
->><p>`${!var*}`</p>
->><p>打印系统中所有以var开头的变量。两者是一样的，唯一不同，@整个当字符串处理，*每个当字符串处理。（详细讲解，在以后循环章节再补充）</p>
->
->*	五． 有用的自带变量
->><p>$0,$1,$2…$9 $0代表脚本本身，$1参数的位置。注意当你的参数大于10时，变量的写法${10}
->>,在10上加上 { } 。</p>
->><p>$#用来计算参数的个数。</p>
->><p>$* 与$@ 显示该脚本所有参数。</p>
->>举例：如下图18
->
->><pre><code>
+<p>如图17打印出系统中以P开头的变量。</p>
+<p>总结： `${!var@}`</p>
+<p>`${!var*}`</p>
+<p>打印系统中所有以var开头的变量。两者是一样的，唯一不同，@整个当字符串处理，*每个当字符串处理。（详细讲解，在以后循环章节再补充）</p>
+
+*	五． 有用的自带变量
+<p>$0,$1,$2…$9 $0代表脚本本身，$1参数的位置。注意当你的参数大于10时，变量的写法${10}
+,在10上加上 { } 。</p>
+<p>$#用来计算参数的个数。</p>
+<p>$* 与$@ 显示该脚本所有参数。</p>
+举例：如下图18
+
+<pre><code>
 [root@localhost ~]# vi test.sh
 \#!/bin/bash
 echo \$1=$1
@@ -444,11 +442,11 @@ echo \$8=$8
 echo \$9=$9
 echo \$10=${10}
 
->>echo \$#=$#
+echo \$#=$#
 echo \$*=$*
 echo \$@=$@
->>*************************************
->>[root@localhost ~]# sh test.sh a b c d e f j k l m n 
+*************************************
+[root@localhost ~]# sh test.sh a b c d e f j k l m n 
 $1=a
 $2=b
 $3=c
@@ -465,25 +463,24 @@ $@=a b c d e f j k l m n
 [root@localhost ~]# 
 <图18>
 </code></pre>
->>***
->><p>$$ 指当前shell的PID</p>
->>
->举例：
->><pre><code>[root@localhost ~]# echo $$
+***
+<p>$$ 指当前shell的PID</p>
+举例：
+<pre><code>[root@localhost ~]# echo $$
 25015
 [root@localhost ~]# 
 </code></pre>
->>
->>***
->><p>$_ 上一条命令的最后一个参数。</p>
->举例：
->>
->><pre><code>[root@localhost ~]# ps aux >/dev/null 
+
+***
+<p>$_ 上一条命令的最后一个参数。</p>
+举例：
+
+<pre><code>[root@localhost ~]# ps aux >/dev/null 
 [root@localhost ~]# echo $_
 aux
 [root@localhost ~]# 
 </code></pre>
->><pre><code>
+<pre><code>
 [root@localhost ~]# ps -eo pid,ppid,comm >/dev/null 
 [root@localhost ~]# echo $_
 pid,ppid,comm
@@ -492,27 +489,27 @@ pid,ppid,comm
 12:416:operator:x:11:0:operator:/root:/sbin/nologin
 [root@localhost ~]# 
 </code></pre>
->><p>写这样一个脚本，只能在一个会话执行,能办到么？</p>
->>***
->><p>$- 用来查看shell是否交互（himBH），其中有i就是交互式。</p>
->举例：
->><pre><code>[root@localhost ~]# echo $-
+<p>写这样一个脚本，只能在一个会话执行,能办到么？</p>
+***
+<p>$- 用来查看shell是否交互（himBH），其中有i就是交互式。</p>
+举例：
+<pre><code>[root@localhost ~]# echo $-
 himBH
 [root@localhost ~]# 
 </code></pre>
->>***
->>
->><p>$! 显示最后一个进入后台的作业的pid</p>
->><pre><code>
+***
+
+<p>$! 显示最后一个进入后台的作业的pid</p>
+<pre><code>
 [root@localhost ~]# sleep 10 &
 [1] 25652
 [root@localhost ~]# echo $!
 25652
 [root@localhost ~]#
 </code></pre>
->>***
->><p>$? 上一条命令的返回值，0成功，非0部成功。</p>
->><pre><code>
+***
+<p>$? 上一条命令的返回值，0成功，非0部成功。</p>
+<pre><code>
 [root@localhost ~]# test
 [root@localhost ~]# echo $?
 1
@@ -521,13 +518,13 @@ himBH
 0
 [root@localhost /]# 
 </code></pre>
->>***
->*	六． 有趣的操作符号
->><p>&& 前面的命令执行成功，则执行后面的命令执行</p>
->><p>|| 前面的命令执行不成功，则执行后面的命令执行</p>
->><p>`;` 命令的分割符号。</p>
->举例：
->><pre><code>
+***
+*	六． 有趣的操作符号
+<p>&& 前面的命令执行成功，则执行后面的命令执行</p>
+<p>|| 前面的命令执行不成功，则执行后面的命令执行</p>
+<p>`;` 命令的分割符号。</p>
+举例：
+<pre><code>
 [root@localhost ~]# echo hello | grep a && echo "匹配"
 [root@localhost ~]# echo hello | grep a || echo "不匹配"   
 不匹配
@@ -548,26 +545,26 @@ hello
 不匹配
 [root@localhost ~]# 
 </code></pre>
->>
->><p>&& || 这两个符号太长的时候，关键看它之前执行之后返回的结果。</p>
->><p>； 前面命令不管成不成功都执行。</p>
->><p>& 后台操作符号。其实它可以实现并发的效果。</p>
->><p>例如：两个脚本</p>
->><pre><code>[root@localhost ~]# vi ping.sh
->>#!/bin/bash
+
+<p>&& || 这两个符号太长的时候，关键看它之前执行之后返回的结果。</p>
+<p>； 前面命令不管成不成功都执行。</p>
+<p>& 后台操作符号。其实它可以实现并发的效果。</p>
+<p>例如：两个脚本</p>
+<pre><code>[root@localhost ~]# vi ping.sh
+#!/bin/bash
 ping 172.16.10.1 -c 5 &
 ping 172.16.10.101 -c 5 &
 ping 172.16.10.104 -c 5 &
->>***
->>[root@localhost ~]# vi ping.sh1 
->>#!/bin/bash
+***
+[root@localhost ~]# vi ping.sh1 
+#!/bin/bash
 ping 172.16.10.1 -c 5
 ping 172.16.10.101 -c 5
 ping 172.16.10.104 -c 5
 </code></pre>
->><p>执行两个脚本后所用的时间对比</p>
->><pre><code>
->>[root@localhost ~]# time `sh ping.sh` 
+<p>执行两个脚本后所用的时间对比</p>
+<pre><code>
+[root@localhost ~]# time `sh ping.sh` 
 real    0m4.987s
 user    0m0.000s
 sys     0m0.017s
@@ -575,14 +572,13 @@ sys     0m0.017s
 real    0m15.018s
 user    0m0.002s
 sys     0m0.039s
->>[root@localhost ~]#
+[root@localhost ~]#
 </code></pre>
->>
->><p>讨论并发的问题</p>
->><p>（） 合并输出，（）里面的命令在子shell中执行。</p>
->举例：
->>
->><pre><code>
+
+<p>讨论并发的问题</p>
+<p>（） 合并输出，（）里面的命令在子shell中执行。</p>
+举例：
+<pre><code>
 [root@localhost ~]# cat /tmp/a
 a
 [root@localhost ~]# cat /tmp/b
@@ -597,13 +593,13 @@ a
 b
 [root@localhost ~]#
 </code></pre>
->><p>（exit；）退出子shell</p>
->><p>{exit；}退出当前shell</p>
->>***
->><p>$SHLVL 这个变量 可以查看你当前shell跑到了第几层。</p>
->>
->举例：
->><pre><code>
+<p>（exit；）退出子shell</p>
+<p>{exit；}退出当前shell</p>
+***
+<p>$SHLVL 这个变量 可以查看你当前shell跑到了第几层。</p>
+
+举例：
+<pre><code>
 [root@localhost ~]# bash
 [root@localhost ~]# bash
 [root@localhost ~]# bash
@@ -612,58 +608,58 @@ b
 5
 [root@localhost ~]#
 </code></pre>
->><p>好处是在写shell脚本时，观察自己的变量在第几层执行。</p>
->><p>总结shell的内置变量，总结常用。</p>
->>***
->><p>| 管道 把前面执行的结果，交给后面的命令处理。</p>
->><p>‘ ’强引用</p>
->><p>“ ”弱引用</p>
->举例：
->><pre><code>
+<p>好处是在写shell脚本时，观察自己的变量在第几层执行。</p>
+<p>总结shell的内置变量，总结常用。</p>
+***
+<p>| 管道 把前面执行的结果，交给后面的命令处理。</p>
+<p>‘ ’强引用</p>
+<p>“ ”弱引用</p>
+举例：
+<pre><code>
 [root@localhost ~]# echo '$a'
 $a
 [root@localhost ~]# echo "$a"
 test
 [root@localhost ~]#
 </code></pre>
->>***
->><p>\ 转义字符。所谓的转义就是把字符本身的含义转化成另外一个含义。根据不同的环境进行转移。</p>
->><p>`` 反引号，键盘1左边的那个反引号。 实际中shell在执行的过程中，先执行的 `` 里面的动作，再执行整个语句。在shell中不见意常用。</p>
->举例：
->><pre><code>
+***
+<p>\ 转义字符。所谓的转义就是把字符本身的含义转化成另外一个含义。根据不同的环境进行转移。</p>
+<p>`` 反引号，键盘1左边的那个反引号。 实际中shell在执行的过程中，先执行的 `` 里面的动作，再执行整个语句。在shell中不见意常用。</p>
+举例：
+<pre><code>
 [root@localhost ~]# echo `whoami`
 root
 [root@localhost ~]# 
 </code></pre>
->><p>$( ) 和 ` ` 执行效果一样，在shell脚本中建议使用$()</p>
->举例：
->><pre><code>
+<p>$( ) 和 ` ` 执行效果一样，在shell脚本中建议使用$()</p>
+举例：
+<pre><code>
 [root@localhost ~]# echo $(whoami) 
 root
 [root@localhost ~]#
 </code></pre>
->>***
->><p>eval 把后面的字符串当命令来使用。</p>
->举例：
->><pre><code>
+***
+<p>eval 把后面的字符串当命令来使用。</p>
+举例：
+<pre><code>
 [root@localhost ~]# eval $(echo whoami) 
 root
 [root@localhost ~]# 
 </code></pre>
->>***
->><p>其他变量 type去查看</p>
->><pre><code>
+***
+<p>其他变量 type去查看</p>
+<pre><code>
 [root@localhost ~]# type /bin/echo 
 /bin/echo is /bin/echo
 [root@localhost ~]# type test
 test is a shell builtin
 [root@localhost ~]# 
 </code></pre>
->>***
->
->*	七． 数学运算与数组。
->><p>复杂的数学运算使用bc，下面是简单的数学运算。</p>
->><pre><code>
+***
+
+*	七． 数学运算与数组。
+<p>复杂的数学运算使用bc，下面是简单的数学运算。</p>
+<pre><code>
 [root@localhost ~]# a=1
 [root@localhost ~]# b=2
 [root@localhost ~]# echo $a+$b
@@ -677,12 +673,12 @@ test is a shell builtin
 3
 [root@localhost ~]# 
 </code></pre>
->>***
->><p>数组：</p>
->><p>定义数组：</p>
->><p>`Var=（word0 word1 word2 word3）`</p>
->><p>`echo ${var[0]}` 查看结果。</p>
->><pre><code>
+***
+<p>数组：</p>
+<p>定义数组：</p>
+<p>`Var=（word0 word1 word2 word3）`</p>
+<p>`echo ${var[0]}` 查看结果。</p>
+<pre><code>
 [root@localhost ~]# boss=(kk yy zz)
 [root@localhost ~]# echo ${boss[0]}
 kk
@@ -704,9 +700,9 @@ kk yy zz
 kk yy zz
 [root@localhost ~]# 
 </code></pre>
->>***
->><p>改变数组中的元素。</p>
->><pre><code>[root@localhost ~]# boss=(aa bb cc)
+***
+<p>改变数组中的元素。</p>
+<pre><code>[root@localhost ~]# boss=(aa bb cc)
 [root@localhost ~]# echo ${boss[*]}
 aa bb cc
 [root@localhost ~]# boss[1]=hello
@@ -714,8 +710,8 @@ aa bb cc
 aa hello cc
 [root@localhost ~]# 
 </code></pre>
->><p>举例: 数组相当于古代的翻牌子</p>
->><p>妃子=（华妃 甄环）</p>
->>***
->>
->>
+<p>举例: 数组相当于古代的翻牌子</p>
+<p>妃子=（华妃 甄环）</p>
+***
+
+
