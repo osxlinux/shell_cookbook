@@ -21,9 +21,9 @@
 >6.	有趣的操作符号
 >7.	数学运算与数组
 
->* 一.	bash通配符
+* 一.	bash通配符
 
->>shell常见通配符
+shell常见通配符
 >><table>
 <tr>
 <th><I>字符</I></th>
@@ -62,27 +62,25 @@
 <th><I>a{abc，xyz，123}b a与b之间只能是abc或xyz或123 这三个字符串之一.</I></th>
 </tr>
 </table>
->
->
->
-><p>注：此处的 * 和正则中 * 的区别，正则中 * 始终出现在命令的参数部分。</p>
-><p>比如 ls * 中的* 代表的是通配符，而`grep ‘.*’/etc/passwd` 代表正则。</p>
+
+<p>注：此处的 * 和正则中 * 的区别，正则中 * 始终出现在命令的参数部分。</p>
+<p>比如 ls * 中的* 代表的是通配符，而`grep ‘.*’/etc/passwd` 代表正则。</p>
 思考：`mkdir –pv /tmp/{a，b}/{1，2，3}`一共创建了多少个文件？
 [：digit：] 在这里任然适用
 查看一个文件名为数字文件ls –lh `[[：digit：]]`
 
->* 二． 设定变量。
+* 二． 设定变量。
 
 
->	1〉变量名=值
->格式的要求“开头必须是字母或者下划线”，“=两边不能有空格”
->
->	2〉取消变量
->
->	unset 变量名
->>
->举例：
->><pre><code>[root@localhost ~]# b=123 
+	1〉变量名=值
+格式的要求“开头必须是字母或者下划线”，“=两边不能有空格”
+
+	2〉取消变量
+
+	unset 变量名
+
+举例：
+<pre><code>[root@localhost ~]# b=123 
 [root@localhost ~]# a=hello
 [root@localhost ~]# echo $a
 hello
@@ -91,27 +89,27 @@ hello
 [root@localhost ~]# unset a
 [root@localhost ~]# echo $a
 
->>[root@localhost ~]#
+[root@localhost ~]#
 </code></pre>
->><p>在其他编程语言中需要区分变量类型，在shell中是不区分的，拿以上变量来说都是一个变量。</p>
->
->*	三.	变量的工作范围
->><p>设定一个变量在什么样一个范围内会生效，在什么时候继承下去。</p>
->举例：
->><pre><code>
+<p>在其他编程语言中需要区分变量类型，在shell中是不区分的，拿以上变量来说都是一个变量。</p>
+
+*	三.	变量的工作范围
+<p>设定一个变量在什么样一个范围内会生效，在什么时候继承下去。</p>
+举例：
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# bash
 [root@localhost ~]# echo $a
 
->>[root@localhost ~]# 
+[root@localhost ~]# 
 </code></pre> 
->>
->><p>bash命令是在当前的进程产生一个子进程。</p>
->><p>父bash `a=123`</p>
->><p>子进程bash 在子进程中父进程的变量不生效。所以以上例子中没</p>
->><p>通过pstree命令可以看出整个过程。最顶端的那个进程为init，init为所有进程的父进程</p>
->>
->><pre><code>
+
+<p>bash命令是在当前的进程产生一个子进程。</p>
+<p>父bash `a=123`</p>
+<p>子进程bash 在子进程中父进程的变量不生效。所以以上例子中没</p>
+<p>通过pstree命令可以看出整个过程。最顶端的那个进程为init，init为所有进程的父进程</p>
+
+<pre><code>
 [root@localhost ~]# pstree
 init─┬─acpid
      ├─atd
@@ -140,19 +138,19 @@ init─┬─acpid
      │         ├─ata/0
  .....
 </code></pre>
->>
->><p>在当前shell中打开一个shell，使用bash命令。退出子shell，使用exit.</p>
->><p>变量只在当前生效：</p>
->><pre><code>
+
+<p>在当前shell中打开一个shell，使用bash命令。退出子shell，使用exit.</p>
+<p>变量只在当前生效：</p>
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# bash
 [root@localhost ~]# echo $a
 
->>[root@localhost ~]# 
+[root@localhost ~]# 
 </code></pre> 
->><p>变量继承，在所有子进程中生效。export 命令向下影响所有的子进程。</p>
->>举例：
->><pre><code>
+<p>变量继承，在所有子进程中生效。export 命令向下影响所有的子进程。</p>
+举例：
+<pre><code>
 [root@localhost ~]# a=123
 [root@localhost ~]# export a
 [root@localhost ~]# bash
@@ -160,10 +158,10 @@ init─┬─acpid
 123
 [root@localhost ~]#
 </code></pre>
->>*	系统变量和环境变量
->><p>set 返回结果包含环境变量和局部变量。</p>
->><p>env 返回结果包含环境变量。</p>
->><pre><code>
+*	系统变量和环境变量
+<p>set 返回结果包含环境变量和局部变量。</p>
+<p>env 返回结果包含环境变量。</p>
+<pre><code>
 [root@localhost ~]# set
 BASH=/bin/bash
 BASH_ARGC=()
@@ -191,8 +189,8 @@ LANG=zh_CN.UTF-8
 LESSOPEN='|/usr/bin/lesspipe.sh %s'
 .....
 </code></pre>
->>
->><pre><code>
+
+<pre><code>
 [root@localhost ~]# env
 HOSTNAME=localhost.localdomain
 SHELL=/bin/bash
@@ -218,17 +216,17 @@ G_BROKEN_FILENAMES=1
 _=/bin/env
 [root@localhost ~]#
 </code></pre>
->><p>所谓系统变量：自己定义的一个变量就是系统变量。</p>
->><p>环境变量:通过env返回的结果为环境变量。</p>
->><p>以下四个变量的执行顺序是怎么排列：</p>
->><pre><code>
+<p>所谓系统变量：自己定义的一个变量就是系统变量。</p>
+<p>环境变量:通过env返回的结果为环境变量。</p>
+<p>以下四个变量的执行顺序是怎么排列：</p>
+<pre><code>
 /etc/ profile
 ~/.bash_profile
 ~/.bashrc
 /etc/bashrc
 </code></pre>
->><p>分别定义同一个变量不同的返回值。</p>
->><pre><code>/etc/ profile 中定义 a=123
+<p>分别定义同一个变量不同的返回值。</p>
+<pre><code>/etc/ profile 中定义 a=123
 ~/.bash_profile 中定义 a=234
 ~/.bashrc 中定义 a=345
 /etc/bashrc a=456
