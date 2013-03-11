@@ -250,9 +250,9 @@ _=/bin/env
 <p>su – 登陆shell</p>
 <p>su 非登陆shell</p>
 <p>总结一下shell内置的环境变量有哪些？</p>
-
-*	四． 变量的有意思的用法。
 ***
+*	四． 变量的有意思的用法。
+
 <pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:-hello}
