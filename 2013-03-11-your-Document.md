@@ -252,6 +252,7 @@ _=/bin/env
 <p>总结一下shell内置的环境变量有哪些？</p>
 
 *	四． 变量的有意思的用法。
+***
 <pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:-hello}
@@ -259,7 +260,6 @@ hello
 [root@localhost ~]# echo $a
 
 [root@localhost ~]#
-<图1>
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=123
@@ -268,10 +268,10 @@ hello
 [root@localhost ~]# echo $a
 123
 [root@localhost ~]# 
-<图2>
 </code></pre>
-<p>如图1.2对比，当a没有值得时候，临时使用hello。当a有值的时候输出a的值。</p>
+<p>对比，当a没有值得时候，临时使用hello。当a有值的时候输出a的值。</p>
 <p>总结：`${var:-word} `如果var没有值，则临时设定值为`word`</p>
+***
 <pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:=hello}
@@ -279,7 +279,7 @@ hello
 [root@localhost ~]# echo $a
 hello
 [root@localhost ~]# 
-<图3>
+
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=123
@@ -288,10 +288,11 @@ hello
 [root@localhost ~]# echo $a
 123
 [root@localhost ~]# 
-<图4>
+
 </code></pre>
-<p>如图3.4对比，当a没有值的时候，会设定为hello。当a有值时输出a的值。</p>
+<p>对比以上，当a没有值的时候，会设定为hello。当a有值时输出a的值。</p>
 <p>总结 ：${var:=word}如果var没有值，设定为word。当var有值输出a的值。</p>
+***
 <pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:+hello}
@@ -299,8 +300,6 @@ hello
 [root@localhost ~]# echo $a
 
 [root@localhost ~]# 
-
-<图5>
 
 </code></pre>
 <pre><code>
@@ -310,16 +309,16 @@ hello
 [root@localhost ~]# echo $a
 123
 [root@localhost ~]# 
-<图6>
 </code></pre>
-<p>如图5.6，当a有值时，会临时使用hello，但是值本身不改变。</p>
+<p>对比以上，当a有值时，会临时使用hello，但是值本身不改变。</p>
 <p>总结：${var:+word} 如果var有值，临时设定为word，但是var本身的值不改变。</p>
+***
 <pre><code>
 [root@localhost ~]# a=
 [root@localhost ~]# echo ${a:?hello}
 bash: a: hello
 [root@localhost ~]# 
-<图7>
+
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=123
@@ -328,10 +327,11 @@ bash: a: hello
 [root@localhost ~]# echo $a
 123
 [root@localhost ~]#
-<图8>
+
 </code></pre>
-<p>如图：7.8,如果a没有值，报错，如果a有值打印出a的值；</p>
+<p>对比以上,如果a没有值，报错，如果a有值打印出a的值；</p>
 <p>总结：${var:?word} 如果var没有值，报错，如果var有值打印出var的值。</p>
+***
 <pre><code>
 [root@localhost ~]# a=hello
 [root@localhost ~]# echo ${a:0}
@@ -345,42 +345,43 @@ lo
 [root@localhost ~]# echo ${a:4}
 o
 [root@localhost ~]# 
-<图9>
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=hello
 [root@localhost ~]# echo ${a:1:3}
 ell
 [root@localhost ~]#
-<图10>
+
 </code></pre>
-<p>如图9.10</p>
+<p>对比以上</p>
 <p>总结：${var:offset}从变量offset位置开始，输出到结束</p>
 <p>$(var:offset：length)从变量offset开始，输出length</p>
+***
 <pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a%/*}
 /usr/bin
 [root@localhost ~]# 
-<图11>
+
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a%%/*}  
 
 [root@localhost ~]#
-<图12>
+
 </code></pre>
-<p>如图11从a的值的结尾开始往前数，进行最小匹配，删除匹配部分。返回的是`/usr/bin`</p>
-<p>如图12从a的值的结尾开始往前数，进行最大的匹配，并删除匹配的部分，那么返回值为空</p>
+<p>从a的值的结尾开始往前数，进行最小匹配，删除匹配部分。返回的是`/usr/bin`</p>
+<p>从a的值的结尾开始往前数，进行最大的匹配，并删除匹配的部分，那么返回值为空</p>
 <p>总结：${var%模式}从尾部开始，进行最小匹配,,然后删除匹配部分。</p>
 <p>${var%%模式}从尾部开始，进行最大匹配，然后删除匹配部分。</p>
+***
 <pre><code>
 [root@localhost ~]# a=/usr/bin/bash
 [root@localhost ~]# echo ${a#/*}   
 usr/bin/bash
 [root@localhost ~]# 
-<图13>
+
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=/usr/bin/bash
@@ -388,39 +389,41 @@ usr/bin/bash
 
 [root@localhost ~]# 
 
-<图14>
+
 </code></pre>
-<p>如图13以`/`分割，从左开始第一个/之前的部分（包括/）匹配，那么删除之前的部分。</p>
-<p>如图14以`/`为分割，从左开始第一个直到结尾最后一个/的内容最大匹配，那么删除之前的部分。</p>
+<p>以`/`分割，从左开始第一个/之前的部分（包括/）匹配，那么删除之前的部分。</p>
+<p>以`/`为分割，从左开始第一个直到结尾最后一个/的内容最大匹配，那么删除之前的部分。</p>
 <p>总结：`${var#模式}`从头部开始，进行最小匹配，然后删除匹配部分。</p>
 <p>`${var##模式}`从头部开始，进行最大匹配，然后删除匹配部分。</p>
+***
 <pre><code>[root@localhost ~]# a=nalmelaminceaneak
 [root@localhost ~]# echo ${#a}
 17
 [root@localhost ~]# 
-<图15>
+
 </code></pre>
 <pre><code>
 [root@localhost ~]# a=nsnkdknekalsmle1111
 [root@localhost ~]# echo ${#a}           
 19
 [root@localhost ~]# 
-<图16>
+
 </code></pre>
-如图15.16变量之前的#是可以用来计算变量值中的字符串的。
-总结：${#var} 用来计算变量字符串。
-以上部分作为在shell中字符串的截取。其中 * 通配符，还可以用 ？号
+<p>变量之前的#是可以用来计算变量值中的字符串的。</p>
+<p>总结：${#var} 用来计算变量字符串。</p>
+<p>以上部分作为在shell中字符串的截取。其中 * 通配符，还可以用 ？号</p>
+***
 <pre><code>
 [root@localhost ~]# echo ${!P*}
 PATH PIPESTATUS PPID PS1 PS2 PS4 PWD
 [root@localhost ~]# 
-<图17>
+
 </code></pre>
-<p>如图17打印出系统中以P开头的变量。</p>
+<p>打印出系统中以P开头的变量。</p>
 <p>总结： `${!var@}`</p>
 <p>`${!var*}`</p>
 <p>打印系统中所有以var开头的变量。两者是一样的，唯一不同，@整个当字符串处理，*每个当字符串处理。（详细讲解，在以后循环章节再补充）</p>
-
+***
 *	五． 有用的自带变量
 <p>$0,$1,$2…$9 $0代表脚本本身，$1参数的位置。注意当你的参数大于10时，变量的写法${10}
 ,在10上加上 { } 。</p>
